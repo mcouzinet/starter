@@ -2,10 +2,12 @@ app = {
 
     mobile : false,
 
+
     UI : {
         'body' : $('body'),
         'preloader' : $('#UI_preloader')
     },
+
 
     init : function(){
         var $win = $(window);
@@ -13,20 +15,17 @@ app = {
         helpers.isMobile();
 
         app.resize();
-        app.click();
+        app.initClick();
 
         $win.bind('resize', function(){ app.resize(); });
     },
 
-    resize : function(){
 
-    },
-
-    click : function(){
+    initClick : function(){
         var $win = $(window),
             event = app.mobile ? 'click, touchstart' : 'click';
 
-        $win.bind(event, 'a[data-action], button[data-action]', function(e){
+        $win.on(event, 'a[data-action], button[data-action]', function(e){
             e.preventDefault();
 
             var el = e.target,
@@ -37,9 +36,13 @@ app = {
                 app[method](el, url);
             } else { console.log('error : method "' + method + '" not found'); }
         });
+    },
+
+
+    resize : function(){
+
     }
 };
-
 
 
 $(function() { app.init(); });

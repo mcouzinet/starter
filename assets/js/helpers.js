@@ -2,6 +2,19 @@ helpers = {
 
     cache : [],
 
+
+    // LIST OBJECT METHOD : DEFAULT = HELPERS
+    list : function(obj) {
+        if(typeof obj != 'object') { obj = helpers; }
+        var list = Object.getOwnPropertyNames(obj);
+
+        for(var i = 0; i < list.length; i++) {
+            var subList = typeof obj[list[i]] == 'object' ? Object.getOwnPropertyNames( obj[list[i]] ) : '';
+            console.log(list[i], subList);
+        }
+    },
+
+
     // IS MOBILE
     isMobile : function(){
         if(jQuery.browser.mobile) {
@@ -25,7 +38,6 @@ helpers = {
 
 
     // TODO : REVIEW PATH PRELOAD
-
     // ANIM SPRITE : CSS BACKGROUND
     sprite: function($el, path, length, loop, callback){
         var id = [],
@@ -56,6 +68,8 @@ helpers = {
         }, speed);
     },
 
+
+    // PRELOAD SPRITE IMAGE
     preloadSprite : function(path, length, callback){
         var id = [];
         id.push(path);
@@ -68,7 +82,8 @@ helpers = {
         }
     },
 
-    // IF ELEMENT COMPLETELY VISIBLE : RETURN "TRUE" OR ELEMENT'S POSITION
+
+    // IF ELEMENT TOTALLY VISIBLE : RETURN "TRUE" OR ELEMENT'S POSITION
     isOnScreen : function($el) {
         var $win = $(window),
             win = {
@@ -93,6 +108,7 @@ helpers = {
         return pos;
     },
 
+
     // ADD HTML VIEW ON DOM : NAME'S VIEW = CLASS !
     addView : function(path, callback, $parent){
         if(typeof path != 'undefined') {
@@ -110,6 +126,7 @@ helpers = {
         } else { console.log('view undefined'); }
     },
 
+
     // REMOVE HTML VIEW
     removeView : function(path, callback){
         if(typeof helpers.cache[path] == "undefined") {
@@ -120,6 +137,7 @@ helpers = {
             if(typeof callback == 'function') { callback(); }
         }
     },
+
 
     // ADD or REMOVE GRID ON DOM
     grid : {

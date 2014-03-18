@@ -565,17 +565,3 @@ table {
   height: 1px;
   left: 0px;
 }
-
-/* line 10, ../sass/_UI.scss */
-.UI_starter {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: #DBDBDB;
-  text-align: center;
-  font-size: 32px;
-}
-/* line 18, ../sass/_UI.scss */
-.UI_starter h1 {
-  color: #131313;
-}
