@@ -1,0 +1,116 @@
+
+// GRADIENT
+@mixin gradient($direction, $color1, $color2, $start, $stop) {
+    background: $color1;
+    background: -webkit-linear-gradient($direction, $color1 $start, $color2 $stop);
+    background: -moz-linear-gradient($direction, $color1 $start, $color2 $stop);
+    background: -ms-linear-gradient($direction, $color1 $start, $color2 $stop);
+    background: linear-gradient($direction,  $color1 $start, $color2 $stop);
+}
+
+
+// GRADIENT BEVEL
+@mixin gradientRadial($color1, $color2, $start, $stop) {
+    background: $color1;
+    background: -moz-radial-gradient(center, ellipse cover, $color1 $start, $color2 $stop);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop($start,$color1), color-stop($stop,$color2));
+    background: -webkit-radial-gradient(center, ellipse cover, $color1 $start,$color2 $stop);
+    background: -ms-radial-gradient(center, ellipse cover, $color1 $start,$color2 $stop);
+    background: radial-gradient(ellipse at center, $color1 $start,$color2 $stop);
+}
+
+
+// BOX SIZING : DEFAULT 'BORDER-BOX'
+@mixin boxSizing($property : border-box) {
+    -webkit-box-sizing: $property;
+    -moz-box-sizing: $property;
+    box-sizing: $property;
+}
+
+
+// TRANSFORM : TRANSLATE Y
+@mixin translateY($val) {
+    -webkit-transform: translateY($val);
+    -ms-transform: translateY($val);
+    transform: translateY($val);
+}
+
+
+// TRANSFORM : TRANSLATE X
+@mixin translateX($val) {
+    -webkit-transform: translateX($val);
+    -ms-transform: translateX($val);
+    transform: translateX($val);
+}
+
+
+// TRANSFORM : TRANSLATE 3D
+@mixin translate3D($x, $y, $z) {
+    -webkit-transform: translate3d($x, $y, $z);
+    -ms-transform: translate3d($x, $y, $z);
+    transform: translate3d($x, $y, $z);
+}
+
+
+// TRANSFORM : SCALE
+@mixin scale($val) {
+    -webkit-transform: scale($val);
+    -ms-transform: scale($val);
+    transform: scale($val);
+}
+
+
+// TRANSFORM : ROTATE
+@mixin rotate($deg) {
+    -webkit-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+
+// FILTER : BLUR
+@mixin blur($blur) {
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -ms-filter: blur($blur);
+    filter: blur($blur);
+}
+
+
+// TRANSITION : DEFAULT 'ALL' && '.2S'
+@mixin transition($property : all, $time : .2s, $delay : 0s, $effect : ease) {
+    -webkit-transition: $property $time $delay $effect;
+    transition: $property $time $delay $effect;
+}
+
+
+// REMOVE TRANSITION
+@mixin removeTransition {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+
+
+// OPACITY : DEBUG FOR IE
+@mixin opacity($value) {
+    opacity: $value;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="$value * 100")";
+    filter: alpha(opacity= $value * 100 );
+    zoom: 1;
+}
+
+
+// ELLIPSIS : TRUNCATE TEXT
+@mixin ellipsis {
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+
+// HIDE TEXT : DEBUG FOR IE
+@mixin hideText {
+    font:0/0 a;
+    text-shadow:none;
+    color:transparent;
+}
