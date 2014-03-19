@@ -1,3 +1,9 @@
+/***
+ *
+ * MIXINS : @include mixins(params1, params2);
+ *
+ ***/
+
 
 // GRADIENT
 @mixin gradient($direction, $color1, $color2, $start, $stop) {
@@ -100,17 +106,35 @@
 }
 
 
-// ELLIPSIS : TRUNCATE TEXT
-@mixin ellipsis {
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
+// INPUT PLACEHOLDER COLOR
+@mixin inputPlaceholder($color) {
+    &::-webkit-input-placeholder { color: $color; }
+    &:-moz-placeholder { color: $color; }
+    &::-moz-placeholder { color: $color; }
+    &:-ms-input-placeholder { color: $color; }
 }
 
 
+
+
+/***
+ *
+ * EXTENDS : @extend class;
+ *
+ ***/
+
+
 // HIDE TEXT : DEBUG FOR IE
-@mixin hideText {
+.hideText {
     font:0/0 a;
     text-shadow:none;
     color:transparent;
+}
+
+
+// ELLIPSIS : TRUNCATE TEXT
+.ellipsis {
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }

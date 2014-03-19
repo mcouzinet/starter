@@ -28,18 +28,29 @@ app = {
         $doc.on(event, 'a[data-action], button[data-action]', function(e){
             e.preventDefault();
 
-            var el = e.target,
-                url = $(el).attr('href'),
-                method = $(el).attr('data-action');
+            var $elem = $(e.target),
+                url = $elem.attr('href'),
+                action = $elem.attr('data-action').split(':'),
+                module = action[0],
+                method = action[1];
 
-            if(typeof app[method] != "undefined") {
-                app[method](url, el);
+            var params = url + ',' + $elem;
+
+            if(typeof method == "undefined") {
+                method = module;
+                module = app;
+            }
+
+            module = typeof module == 'object' ? module : eval(module);
+
+            if(typeof module[method] != "undefined") {
+                module[method](url, $elem);
             } else { console.log('error : method "' + method + '" not found'); }
         });
     },
 
 
-    resize : function(){
+    resize : function(url, elem){
 
     }
 };

@@ -110,9 +110,9 @@ helpers = {
 
 
     // ADD HTML VIEW ON DOM : NAME'S VIEW = CLASS !
-    addView : function(path, callback, $parent){
+    addView : function(path, $parent, callback){
         if(typeof path != 'undefined') {
-            $elem = $parent != null ? $parent : app.UI.body;
+            var $elem = $parent != null ? $parent : app.UI.body;
             $.ajax({
                 url: '/views/' + path,
                 success: function (data) {
