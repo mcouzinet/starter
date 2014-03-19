@@ -20,7 +20,7 @@ helpers = {
         if(jQuery.browser.mobile) {
             app.mobile = true;
             app.UI.body.addClass('mobile');
-        }
+        } else { app.UI.body.removeClass('mobile'); }
     },
 
 
@@ -114,7 +114,7 @@ helpers = {
         if(typeof path != 'undefined') {
             $elem = $parent != null ? $parent : app.UI.body;
             $.ajax({
-                url: '/views/' + path + '.html',
+                url: '/views/' + path,
                 success: function (data) {
                     $elem.append(data);
                     helpers.cache[path] = $('.' + path);
@@ -160,6 +160,7 @@ helpers = {
                             + (column ? 'width' : 'height') + ': 1px;'
                             + (column ? 'left : ' : 'top : ') + p + grid.unit + ';'
                             + ' display : block; position : absolute;'
+                            + (column ? 'top : 0;' : null)
 
                 lines.html = ( lines.html == null ? '' : lines.html ) + '<span class="UI_gridJS_' + o + '" style="' + lines.style + '"></span>';
             }

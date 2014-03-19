@@ -22,10 +22,10 @@ app = {
 
 
     initClick : function(){
-        var $win = $(window),
+        var $doc = $(document),
             event = app.mobile ? 'click, touchstart' : 'click';
 
-        $win.on(event, 'a[data-action], button[data-action]', function(e){
+        $doc.on(event, 'a[data-action], button[data-action]', function(e){
             e.preventDefault();
 
             var el = e.target,
@@ -33,7 +33,7 @@ app = {
                 method = $(el).attr('data-action');
 
             if(typeof app[method] != "undefined") {
-                app[method](el, url);
+                app[method](url, el);
             } else { console.log('error : method "' + method + '" not found'); }
         });
     },
