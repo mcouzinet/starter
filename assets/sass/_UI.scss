@@ -6,3 +6,14 @@
     height: 1px;
     left: 0px;
 }
+
+.UI_icon {
+    font-family: 'entypo';
+    font-size: 1.5em;
+    line-height: 1em;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    display: inline-block;
+    &.social { font-family: 'entypo_social'; }
+}

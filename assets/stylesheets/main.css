@@ -549,11 +549,43 @@ table {
 }
 
 @font-face {
-  font-family: 'abc';
-  src: url("../fonts/abc.eot");
-  src: url("../fonts/abc.eot?#iefix") format("embedded-opentype"), url("../fonts/abc.woff") format("woff"), url("../fonts/abc.ttf") format("truetype"), url("../fonts/abc.svg#abc") format("svg");
+  font-family: 'entypo';
+  src: url("../fonts/entypo/entypo.eot");
+  src: url("../fonts/entypo/entypo.eot?#iefix") format("embedded-opentype"), url("../fonts/entypo/entypo.woff") format("woff"), url("../fonts/entypo/entypo.ttf") format("truetype"), url("../fonts/entypo/entypo.svg#entypo") format("svg");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'entypo_social';
+  src: url("../fonts/entypo/entypo_social.eot");
+  src: url("../fonts/entypo/entypo_social.eot?#iefix") format("embedded-opentype"), url("../fonts/entypo/entypo_social.woff") format("woff"), url("../fonts/entypo/entypo_social.ttf") format("truetype"), url("../fonts/entypo/entypo_social.svg#entypo") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/***
+ *
+ * MIXINS : @include mixins(params1, params2);
+ *
+ ***/
+/***
+ *
+ * EXTENDS : @extend class;
+ *
+ ***/
+/* line 128, ../sass/_mixins.scss */
+.hideText {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+/* line 136, ../sass/_mixins.scss */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* line 1, ../sass/_UI.scss */
@@ -564,4 +596,19 @@ table {
   width: 1px;
   height: 1px;
   left: 0px;
+}
+
+/* line 10, ../sass/_UI.scss */
+.UI_icon {
+  font-family: 'entypo';
+  font-size: 1.5em;
+  line-height: 1em;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  display: inline-block;
+}
+/* line 18, ../sass/_UI.scss */
+.UI_icon.social {
+  font-family: 'entypo_social';
 }
