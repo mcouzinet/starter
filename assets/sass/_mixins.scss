@@ -5,6 +5,19 @@
  ***/
 
 
+// CHECK RESPONSIVE SIZE
+@mixin responsiveSize($text) {
+    &:before{
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        font-size: 12px;
+        color: #ccc;
+        content: $text;
+    }
+}
+
+
 // GRADIENT
 @mixin gradient($direction, $color1, $color2, $start, $stop) {
     background: $color1;

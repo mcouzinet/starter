@@ -83,29 +83,17 @@ helpers = {
     },
 
 
-    // IF ELEMENT TOTALLY VISIBLE : RETURN "TRUE" OR ELEMENT'S POSITION
-    isOnScreen : function($el) {
+    // IF ELEMENT VISIBLE : RETURN TRUE OR FALSE
+    isVisible : function(elem, margin) {
         var $win = $(window),
-            win = {
-                scroll : $win.scrollTop(),
-                width : $win.width(),
-                height : $win.height()
-            },
-            elem = {
-                width : $el.width(),
-                height : $el.height(),
-                top : $el.offset().top,
-                left : $el.offset().left,
-            },
-            pos = true;
+            docViewTop = $win.scrollTop(),
+            docViewBottom = docViewTop + $win.height();
 
-        if(elem.left + elem.width > win.width){ pos = (pos == true ? 'right' : pos + ' right'); }
-        if(elem.left < 0){ pos = (pos == true ? 'left' : pos + ' left'); }
+        var $elem = $(elem),
+            elemTop = $elem.offset().top + margin,
+            elemBottom = elemTop + $elem.height() + margin;
 
-        if(elem.top < win.scroll) { pos = (pos == true ? 'top' : pos + ' top'); }
-        if(win.scroll + win.height < elem.top + elem.height) { pos = (pos == true ? 'bottom' : pos + ' bottom'); }
-
-        return pos;
+        return ( (elemBottom  <= docViewBottom) && (elemTop >= docViewTop) );
     },
 
 
@@ -139,6 +127,76 @@ helpers = {
     },
 
 
+    // TEST EMAIL PATTERN : RETURN TRUE OR FALSE
+    isMail : function(email) {
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+    },
+
+
+    // TODO !
+    // INIT CUSTOM SOCIAL
+    social : function(){
+
+        console.log(sharrre);
+        return false;
+
+        $('#twitter').sharrre({
+            share: {
+                twitter: true
+            },
+            template: '<a class="UI_social" href="#"><div class="share"><span></span>Tweet</div><div class="count" href="#">{total}</div></a>',
+            enableHover: false,
+            enableTracking: true,
+            buttons: {
+                twitter: {  }
+            },
+            click: function(api, options){
+                api.simulateClick();
+                api.openPopup('twitter');
+            }
+        });
+
+        $('#facebook').sharrre({
+            share: {
+                facebook: true
+            },
+            template: '<a class="box" href="#"><div class="share"><span></span>Like</div><div class="count" href="#">{total}</div></a>',
+            enableHover: false,
+            enableTracking: true,
+            click: function(api, options){
+                api.simulateClick();
+                api.openPopup('facebook');
+            }
+        });
+
+        $('#googleplus').sharrre({
+            share: {
+                googlePlus: true
+            },
+            template: '<a class="box" href="#"><div class="share"><span></span>Google+</div><div class="count" href="#">{total}</div></a>',
+            enableHover: false,
+            enableTracking: true,
+            click: function(api, options){
+                api.simulateClick();
+                api.openPopup('googlePlus');
+            }
+        });
+    },
+
+
+
+    // SEARCH STRING IN ARRAY
+    inArray : function(array, search) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] === search) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+
     // ADD or REMOVE GRID ON DOM
     grid : {
         draw : function(o, grid){
@@ -159,7 +217,7 @@ helpers = {
                             + 'background : ' + grid.lines.color + ';' 
                             + (column ? 'width' : 'height') + ': 1px;'
                             + (column ? 'left : ' : 'top : ') + p + grid.unit + ';'
-                            + ' display : block; position : absolute;'
+                            + ' display : block; position : fixed; z-index : 10000; '
                             + (column ? 'top : 0;' : null)
 
                 lines.html = ( lines.html == null ? '' : lines.html ) + '<span class="UI_gridJS_' + o + '" style="' + lines.style + '"></span>';

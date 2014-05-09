@@ -574,14 +574,14 @@ table {
  * EXTENDS : @extend class;
  *
  ***/
-/* line 128, ../sass/_mixins.scss */
+/* line 141, ../sass/_mixins.scss */
 .hideText {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
 }
 
-/* line 136, ../sass/_mixins.scss */
+/* line 149, ../sass/_mixins.scss */
 .ellipsis {
   overflow: hidden;
   white-space: nowrap;
@@ -598,7 +598,7 @@ table {
   left: 0px;
 }
 
-/* line 10, ../sass/_UI.scss */
+/* line 12, ../sass/_UI.scss */
 .UI_icon {
   font-family: 'entypo';
   font-size: 1.5em;
@@ -608,7 +608,52 @@ table {
   font-variant: normal;
   display: inline-block;
 }
-/* line 18, ../sass/_UI.scss */
+/* line 20, ../sass/_UI.scss */
 .UI_icon.social {
   font-family: 'entypo_social';
+}
+
+@media (max-width: 767px) {
+  /* line 10, ../sass/_mixins.scss */
+  body:before {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 12px;
+    color: #ccc;
+    content: "Mobile : inf 767px";
+  }
+}
+@media (min-width: 768px) and (orientation: landscape) {
+  /* line 10, ../sass/_mixins.scss */
+  body:before {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 12px;
+    color: #ccc;
+    content: "Tablet landscape : sup 768px";
+  }
+}
+@media (min-width: 768px) and (orientation: portrait) {
+  /* line 10, ../sass/_mixins.scss */
+  body:before {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 12px;
+    color: #ccc;
+    content: "Tablet portrait : sup 768px";
+  }
+}
+@media (min-width: 1025px) {
+  /* line 10, ../sass/_mixins.scss */
+  body:before {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: 12px;
+    color: #ccc;
+    content: "Desktop : sup 1025px";
+  }
 }

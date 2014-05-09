@@ -28,7 +28,7 @@ app = {
         $doc.on(event, 'a[data-action], button[data-action]', function(e){
             e.preventDefault();
 
-            var $elem = $(e.target),
+            var $elem = $(e.currentTarget),
                 url = $elem.attr('href'),
                 action = $elem.attr('data-action').split(':'),
                 module = action[0],
