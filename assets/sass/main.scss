@@ -3,14 +3,16 @@
 @import 'compass/layout/grid-background';
 
 
-// RESET
-@import '_reset';
+// RESET and HELPERS
+@import 'helpers/_reset';
+@import 'helpers/_fonts';
+@import 'helpers/_variables';
+@import 'helpers/_functions';
+@import 'helpers/_mixins';
+@import 'helpers/_extends';
 
 
 // STYLES
-@import '_fonts';
-@import '_variables';
-@import '_mixins';
 @import '_global';
 @import '_UI';
 

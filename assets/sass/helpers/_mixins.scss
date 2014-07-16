@@ -48,6 +48,7 @@
 @mixin textShadow( $values... ) {
     text-shadow: $values;
 }
+
 @mixin noTextShadow {
     text-shadow: none;
 }
@@ -203,26 +204,11 @@
 
 
 // ==========================================================================
-// TRUNCATE TEXTE
+// ELLIPSIS : TRUNCATE TEXTE
 // ==========================================================================
 
 @mixin ellipsis {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-@mixin ellipsisMulti( $font, $line, $number ) {
-    display: block;
-    display: -webkit-box;
-    max-width: 100%;
-    height: $font * $line * $number + px;
-    font-size: $font + px;
-    line-height: $line;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: $number;
-    -webkit-box-orient: vertical;
+    @extend .ellipsis;
 }
 
 
@@ -233,9 +219,7 @@
 // ==========================================================================
 
 @mixin hideText {
-    font: 0/0 a;
-    text-shadow: none;
-    color: transparent;
+    @extend .hideText;
 }
 
 
@@ -278,4 +262,14 @@
 
 }
 
+
+
+
+// ==========================================================================
+// CLEARFIX
+// ==========================================================================
+
+@mixin clearfix {
+    @extend .clearfix;
+}
 
