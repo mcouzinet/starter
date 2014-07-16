@@ -2,29 +2,29 @@
 
 // MOBILE
 @media (max-width: $sizeMobile) {
-    body { @include responsiveSize('Mobile : inf ' + $sizeMobile); }
+
 }
 
 
 // TABLET
 @media (min-width: $sizeTablet) {
-    
+
 }
 
 
 // TABLET LANDSCAPE
 @media (min-width: $sizeTablet) and (orientation: landscape) {
-    body { @include responsiveSize('Tablet landscape : sup ' + $sizeTablet); }
+
 }
 
 
 // TABLET PORTRAIT
 @media (min-width: $sizeTablet) and (orientation: portrait) {
-    body { @include responsiveSize('Tablet portrait : sup ' + $sizeTablet); }
+
 }
 
 
 // DESKTOP
 @media (min-width: $sizeDesktop) {
-    body { @include responsiveSize('Desktop : sup ' + $sizeDesktop); }
+
 }

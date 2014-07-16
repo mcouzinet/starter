@@ -1,153 +1,254 @@
-/***
- *
- * MIXINS : @include mixins(params1, params2);
- *
- ***/
 
 
-// CHECK RESPONSIVE SIZE
-@mixin responsiveSize($text) {
-    &:before{
-        position: absolute;
-        left: 5px;
-        top: 5px;
-        font-size: 12px;
-        color: #ccc;
-        content: $text;
+
+
+/* ==========================================================================
+   GRADIENT
+   ========================================================================== */
+
+@mixin gradient( $direction, $values... ) {
+	background: nth($values, 1);
+	background: -webkit-linear-gradient($direction, $values);
+	background: linear-gradient($direction, $values);
+}
+
+
+
+
+/* ==========================================================================
+   BORDER RADIUS
+   ========================================================================== */
+
+@mixin borderRadius( $radius ) {
+	border-radius: $radius;
+}
+
+
+
+
+/* ==========================================================================
+   BOX SHADOW
+   ========================================================================== */
+
+@mixin boxShadow( $values... ) {
+	box-shadow: $values;
+}
+
+@mixin noBoxShadow {
+	box-shadow: none;
+}
+
+
+
+
+/* ==========================================================================
+   TEXT SHADOW
+   ========================================================================== */
+
+@mixin textShadow( $values... ) {
+	text-shadow: $values;
+}
+@mixin noTextShadow {
+	text-shadow: none;
+}
+
+
+
+
+/* ==========================================================================
+   FILTER
+   ========================================================================== */
+
+@mixin filter( $values... ) {
+	-webkit-filter: $values;
+	-moz-filter: $values;
+	filter: $values;
+}
+
+@mixin blur( $blur ) {
+	@include filter( blur( $blur ) );
+}
+
+@mixin grayscale( $grayscale ) {
+	@include filter( grayscale( $grayscale ) );
+}
+
+
+
+
+/* ==========================================================================
+   TRANSITION
+   ========================================================================== */
+
+@mixin transition( $values... ) {
+	$transitions: ();
+
+
+	@each $declaration in $values {
+
+		@if $declaration == default {
+			$declaration: all .2s;
+		}
+
+		$prop: nth($declaration, 1);
+		$prop-opts: ();
+		$length: length($declaration);
+
+		@for $i from 2 through $length {
+			$prop-opts: append($prop-opts, nth($declaration, $i));
+		}
+
+		$trans: ($prop, $prop-opts);
+		$transitions: append($transitions, $trans, comma);
+	}
+
+	-webkit-transition: trans-prefix($transitions, webkit);
+	-moz-transition: trans-prefix($transitions, moz);
+	transition: $values;
+}
+
+@mixin noTransition {
+	-webkit-transition: none !important;
+	transition: none !important;
+}
+
+
+
+
+/* ==========================================================================
+   ANIMATION
+   ========================================================================== */
+
+@mixin animation($value) {
+	-webkit-animation: $value;
+	animation: $value;
+}
+
+
+
+
+/* ==========================================================================
+   TRANSFORM
+   ========================================================================== */
+
+@mixin transform($val) {
+	-webkit-transform:$val;
+	-ms-transform:$val;
+	transform:$val;
+}
+
+@mixin translate($x, $y) {
+	@include transform( translate( $x, $y ) );
+}
+
+@mixin translate3D($x, $y, $z) {
+	@include transform( translate3d( $x, $y, $z ) );
+}
+
+@mixin scale($ratio) {
+	@include transform( scale( $ratio ) );
+}
+
+@mixin rotate($deg) {
+	@include transform( rotate( $deg ) );
+}
+
+
+
+
+/* ==========================================================================
+   OPACITY
+   ========================================================================== */
+@mixin opacity( $value ) {
+	opacity: $value;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="$value * 100")";
+	filter: alpha(opacity= $value * 100 );
+	zoom: 1;
+}
+
+
+
+
+/* ==========================================================================
+   FONT FACE
+   ========================================================================== */
+
+@mixin fontFace( $name, $path : false, $weight : false, $svgid : false ) {
+
+    @if $svgid == false {
+        $svgid : $name;
+    }
+
+    @if $path == false {
+        $path : $name;
+    }
+
+    @font-face{
+        font-family : $name;
+
+        src : url('/assets/fonts/#{$path}.eot');
+        src : url('/assets/fonts/#{$path}.eot?') format('eot'),
+              url('/assets/fonts/#{$path}.woff') format('woff'),
+              url('/assets/fonts/#{$path}.svg##{$svgid}') format('svg'),
+              url('/assets/fonts/#{$path}.ttf') format('truetype');
+
+        @if $weight != false {
+            font-weight: $weight;
+        }
     }
 }
 
 
-// GRADIENT
-@mixin gradient($direction, $color1, $color2, $start, $stop) {
-    background: $color1;
-    background: -webkit-linear-gradient($direction, $color1 $start, $color2 $stop);
-    background: -moz-linear-gradient($direction, $color1 $start, $color2 $stop);
-    background: -ms-linear-gradient($direction, $color1 $start, $color2 $stop);
-    background: linear-gradient($direction,  $color1 $start, $color2 $stop);
+
+
+/* ==========================================================================
+   TRUNCATE TEXTE
+   ========================================================================== */
+
+@mixin ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
-
-// GRADIENT BEVEL
-@mixin gradientRadial($color1, $color2, $start, $stop) {
-    background: $color1;
-    background: -moz-radial-gradient(center, ellipse cover, $color1 $start, $color2 $stop);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop($start,$color1), color-stop($stop,$color2));
-    background: -webkit-radial-gradient(center, ellipse cover, $color1 $start,$color2 $stop);
-    background: -ms-radial-gradient(center, ellipse cover, $color1 $start,$color2 $stop);
-    background: radial-gradient(ellipse at center, $color1 $start,$color2 $stop);
-}
-
-
-// BOX SIZING : DEFAULT 'BORDER-BOX'
-@mixin boxSizing($property : border-box) {
-    -webkit-box-sizing: $property;
-    -moz-box-sizing: $property;
-    box-sizing: $property;
-}
-
-
-// TRANSFORM : TRANSLATE Y
-@mixin translateY($val) {
-    -webkit-transform: translateY($val);
-    -ms-transform: translateY($val);
-    transform: translateY($val);
-}
-
-
-// TRANSFORM : TRANSLATE X
-@mixin translateX($val) {
-    -webkit-transform: translateX($val);
-    -ms-transform: translateX($val);
-    transform: translateX($val);
-}
-
-
-// TRANSFORM : TRANSLATE 3D
-@mixin translate3D($x, $y, $z) {
-    -webkit-transform: translate3d($x, $y, $z);
-    -ms-transform: translate3d($x, $y, $z);
-    transform: translate3d($x, $y, $z);
-}
-
-
-// TRANSFORM : SCALE
-@mixin scale($val) {
-    -webkit-transform: scale($val);
-    -ms-transform: scale($val);
-    transform: scale($val);
-}
-
-
-// TRANSFORM : ROTATE
-@mixin rotate($deg) {
-    -webkit-transform: rotate($deg);
-    -ms-transform: rotate($deg);
-    transform: rotate($deg);
-}
-
-
-// FILTER : BLUR
-@mixin blur($blur) {
-    -webkit-filter: blur($blur);
-    -moz-filter: blur($blur);
-    -ms-filter: blur($blur);
-    filter: blur($blur);
-}
-
-
-// TRANSITION : DEFAULT 'ALL' && '.2S'
-@mixin transition($property : all, $time : .2s, $delay : 0s, $effect : ease) {
-    -webkit-transition: $property $time $delay $effect;
-    transition: $property $time $delay $effect;
-}
-
-
-// REMOVE TRANSITION
-@mixin removeTransition {
-    -webkit-transition: none !important;
-    transition: none !important;
-}
-
-
-// OPACITY : DEBUG FOR IE
-@mixin opacity($value) {
-    opacity: $value;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="$value * 100")";
-    filter: alpha(opacity= $value * 100 );
-    zoom: 1;
-}
-
-
-// INPUT PLACEHOLDER COLOR
-@mixin inputPlaceholder($color) {
-    &::-webkit-input-placeholder { color: $color; }
-    &:-moz-placeholder { color: $color; }
-    &::-moz-placeholder { color: $color; }
-    &:-ms-input-placeholder { color: $color; }
+@mixin ellipsisMulti( $font, $line, $number ) {
+	display: block;
+	display: -webkit-box;
+	max-width: 100%;
+	height: $font * $line * $number + px;
+	font-size: $font + px;
+	line-height: $line;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: $number;
+	-webkit-box-orient: vertical;
 }
 
 
 
 
-/***
- *
- * EXTENDS : @extend class;
- *
- ***/
+/* ==========================================================================
+   HIDE TEXTE
+   ========================================================================== */
 
-
-// HIDE TEXT : DEBUG FOR IE
-.hideText {
-    font:0/0 a;
-    text-shadow:none;
-    color:transparent;
+@mixin hideText {
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
 }
 
 
-// ELLIPSIS : TRUNCATE TEXT
-.ellipsis {
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
+
+
+/* ==========================================================================
+   BOX SIZING
+   ========================================================================== */
+
+@mixin boxSizing( $value: border-box ) {
+	-webkit-box-sizing: $value;
+	-moz-box-sizing: $value;
+	box-sizing: $value;
 }
+
+
+

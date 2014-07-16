@@ -9,10 +9,9 @@ app = {
     },
 
 
+
     init : function(){
         var $win = $(window);
-
-        helpers.isMobile();
 
         app.resize();
         app.initClick();
@@ -21,37 +20,41 @@ app = {
     },
 
 
-    initClick : function(){
-        var $doc = $(document),
-            event = app.mobile ? 'click, touchstart' : 'click';
 
-        $doc.on(event, 'a[data-action], button[data-action]', function(e){
+    initClick : function(){
+        var $doc = $(document);
+
+        $doc.on( 'click' , 'a[data-action], button[data-action]', function(e){
+
             e.preventDefault();
 
-            var $elem = $(e.currentTarget),
-                url = $elem.attr('href'),
-                action = $elem.attr('data-action').split(':'),
-                module = action[0],
-                method = action[1];
 
-            var params = url + ',' + $elem;
+            var $elem = $( e.currentTarget ),
+                url = $elem.attr( 'href' ),
+                action = $elem.attr( 'data-action' ).split( ':' ),
+                module = eval( action[ 0 ] ),
+                method = action[ 1 ];
 
-            if(typeof method == "undefined") {
-                method = module;
-                module = app;
+            if ( typeof module[ method ] != "undefined" ) {
+                module[ method ]( url, $elem );
+
+            } else {
+                console.log( 'error : method "' + method + '" not found' );
+
             }
-
-            module = typeof module == 'object' ? module : eval(module);
-
-            if(typeof module[method] != "undefined") {
-                module[method](url, $elem);
-            } else { console.log('error : method "' + method + '" not found'); }
         });
     },
 
 
-    resize : function(url, elem){
 
+    resize : function( url, elem ){
+
+    },
+
+
+
+    doSomething : function( url, elem) {
+        console.log( elem );
     }
 };
 
