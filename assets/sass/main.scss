@@ -1,9 +1,19 @@
+
+// COMPASS HELPERS
+@import 'compass/layout/grid-background';
+
+
+// RESET
 @import '_reset';
 
+
+// STYLES
 @import '_fonts';
 @import '_variables';
 @import '_mixins';
 @import '_global';
 @import '_UI';
 
+
+// RESPONSIVE
 @import '_responsive';

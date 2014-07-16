@@ -2,176 +2,177 @@
 
 
 
-/* ==========================================================================
-   GRADIENT
-   ========================================================================== */
+// ==========================================================================
+// GRADIENT
+// ==========================================================================
 
 @mixin gradient( $direction, $values... ) {
-	background: nth($values, 1);
-	background: -webkit-linear-gradient($direction, $values);
-	background: linear-gradient($direction, $values);
+    background: nth($values, 1);
+    background: -webkit-linear-gradient($direction, $values);
+    background: linear-gradient($direction, $values);
 }
 
 
 
 
-/* ==========================================================================
-   BORDER RADIUS
-   ========================================================================== */
+// ==========================================================================
+// BORDER RADIUS
+// ==========================================================================
 
 @mixin borderRadius( $radius ) {
-	border-radius: $radius;
+    border-radius: $radius;
 }
 
 
 
 
-/* ==========================================================================
-   BOX SHADOW
-   ========================================================================== */
+// ==========================================================================
+// BOX SHADOW
+// ==========================================================================
 
 @mixin boxShadow( $values... ) {
-	box-shadow: $values;
+    box-shadow: $values;
 }
 
 @mixin noBoxShadow {
-	box-shadow: none;
+    box-shadow: none;
 }
 
 
 
 
-/* ==========================================================================
-   TEXT SHADOW
-   ========================================================================== */
+// ==========================================================================
+// TEXT SHADOW
+// ==========================================================================
 
 @mixin textShadow( $values... ) {
-	text-shadow: $values;
+    text-shadow: $values;
 }
 @mixin noTextShadow {
-	text-shadow: none;
+    text-shadow: none;
 }
 
 
 
 
-/* ==========================================================================
-   FILTER
-   ========================================================================== */
+// ==========================================================================
+// FILTER
+// ==========================================================================
 
 @mixin filter( $values... ) {
-	-webkit-filter: $values;
-	-moz-filter: $values;
-	filter: $values;
+    -webkit-filter: $values;
+    -moz-filter: $values;
+    filter: $values;
 }
 
 @mixin blur( $blur ) {
-	@include filter( blur( $blur ) );
+    @include filter( blur( $blur ) );
 }
 
 @mixin grayscale( $grayscale ) {
-	@include filter( grayscale( $grayscale ) );
+    @include filter( grayscale( $grayscale ) );
 }
 
 
 
 
-/* ==========================================================================
-   TRANSITION
-   ========================================================================== */
+// ==========================================================================
+// TRANSITION
+// ==========================================================================
 
 @mixin transition( $values... ) {
-	$transitions: ();
+    $transitions: ();
 
 
-	@each $declaration in $values {
+    @each $declaration in $values {
 
-		@if $declaration == default {
-			$declaration: all .2s;
-		}
+        @if $declaration == default {
+            $declaration: all .2s;
+        }
 
-		$prop: nth($declaration, 1);
-		$prop-opts: ();
-		$length: length($declaration);
+        $prop: nth($declaration, 1);
+        $prop-opts: ();
+        $length: length($declaration);
 
-		@for $i from 2 through $length {
-			$prop-opts: append($prop-opts, nth($declaration, $i));
-		}
+        @for $i from 2 through $length {
+            $prop-opts: append($prop-opts, nth($declaration, $i));
+        }
 
-		$trans: ($prop, $prop-opts);
-		$transitions: append($transitions, $trans, comma);
-	}
+        $trans: ($prop, $prop-opts);
+        $transitions: append($transitions, $trans, comma);
+    }
 
-	-webkit-transition: trans-prefix($transitions, webkit);
-	-moz-transition: trans-prefix($transitions, moz);
-	transition: $values;
+    -webkit-transition: trans-prefix($transitions, webkit);
+    -moz-transition: trans-prefix($transitions, moz);
+    transition: $values;
 }
 
 @mixin noTransition {
-	-webkit-transition: none !important;
-	transition: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
 }
 
 
 
 
-/* ==========================================================================
-   ANIMATION
-   ========================================================================== */
+// ==========================================================================
+// ANIMATION
+// ==========================================================================
 
-@mixin animation($value) {
-	-webkit-animation: $value;
-	animation: $value;
+@mixin animation( $value ) {
+    -webkit-animation: $value;
+    animation: $value;
 }
 
 
 
 
-/* ==========================================================================
-   TRANSFORM
-   ========================================================================== */
+// ==========================================================================
+// TRANSFORM
+// ==========================================================================
 
-@mixin transform($val) {
-	-webkit-transform:$val;
-	-ms-transform:$val;
-	transform:$val;
+@mixin transform( $val ) {
+    -webkit-transform:$val;
+    -ms-transform:$val;
+    transform:$val;
 }
 
-@mixin translate($x, $y) {
-	@include transform( translate( $x, $y ) );
+@mixin translate( $x, $y ) {
+    @include transform( translate( $x, $y ) );
 }
 
-@mixin translate3D($x, $y, $z) {
-	@include transform( translate3d( $x, $y, $z ) );
+@mixin translate3D( $x, $y, $z ) {
+    @include transform( translate3d( $x, $y, $z ) );
 }
 
-@mixin scale($ratio) {
-	@include transform( scale( $ratio ) );
+@mixin scale( $ratio ) {
+    @include transform( scale( $ratio ) );
 }
 
-@mixin rotate($deg) {
-	@include transform( rotate( $deg ) );
+@mixin rotate( $deg ) {
+    @include transform( rotate( $deg ) );
 }
 
 
 
 
-/* ==========================================================================
-   OPACITY
-   ========================================================================== */
+// ==========================================================================
+// OPACITY
+// ==========================================================================
+
 @mixin opacity( $value ) {
-	opacity: $value;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="$value * 100")";
-	filter: alpha(opacity= $value * 100 );
-	zoom: 1;
+    opacity: $value;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="$value * 100")";
+    filter: alpha(opacity= $value * 100 );
+    zoom: 1;
 }
 
 
 
 
-/* ==========================================================================
-   FONT FACE
-   ========================================================================== */
+// ==========================================================================
+// FONT FACE
+// ==========================================================================
 
 @mixin fontFace( $name, $path : false, $weight : false, $svgid : false ) {
 
@@ -201,54 +202,80 @@
 
 
 
-/* ==========================================================================
-   TRUNCATE TEXTE
-   ========================================================================== */
+// ==========================================================================
+// TRUNCATE TEXTE
+// ==========================================================================
 
 @mixin ellipsis {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 @mixin ellipsisMulti( $font, $line, $number ) {
-	display: block;
-	display: -webkit-box;
-	max-width: 100%;
-	height: $font * $line * $number + px;
-	font-size: $font + px;
-	line-height: $line;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-webkit-line-clamp: $number;
-	-webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: $font * $line * $number + px;
+    font-size: $font + px;
+    line-height: $line;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $number;
+    -webkit-box-orient: vertical;
 }
 
 
 
 
-/* ==========================================================================
-   HIDE TEXTE
-   ========================================================================== */
+// ==========================================================================
+// HIDE TEXTE
+// ==========================================================================
 
 @mixin hideText {
-	font: 0/0 a;
-	text-shadow: none;
-	color: transparent;
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
 }
 
 
 
 
-/* ==========================================================================
-   BOX SIZING
-   ========================================================================== */
+// ==========================================================================
+// BOX SIZING
+// ==========================================================================
 
 @mixin boxSizing( $value: border-box ) {
-	-webkit-box-sizing: $value;
-	-moz-box-sizing: $value;
-	box-sizing: $value;
+    -webkit-box-sizing: $value;
+    -moz-box-sizing: $value;
+    box-sizing: $value;
 }
 
+
+
+
+// ==========================================================================
+// SIMPLE MEDIA QUERIES
+// ==========================================================================
+
+@mixin media( $value, $orientation : false, $operator: 'min-width', $type : 'screen' ) {
+
+    @if $orientation != false and $operator != false {
+        @media #{$type} and ( #{$operator} : #{$value} ) and ( orientation: #{$orientation} ) {
+            @content;
+        }
+
+    } @else if $orientation != false and $operator == false {
+        @media #{$type} and  ( orientation : #{$orientation} ) {
+            @content;
+        }
+
+    } @else {
+        @media #{$type} and ( #{$operator} : #{$value} ) {
+            @content;
+        }
+    }
+
+}
 
 
