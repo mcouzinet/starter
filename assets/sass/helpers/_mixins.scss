@@ -172,9 +172,15 @@
 // ==========================================================================
 
 @mixin transform( $val ) {
-    -webkit-transform:$val;
-    -ms-transform:$val;
-    transform:$val;
+    -webkit-transform: $val;
+    -ms-transform: $val;
+    transform: $val;
+}
+
+@mixin transformOrigin( $val ) {
+    -webkit-transform-origin: $val;
+    -ms-transform-origin: $val;
+    transform-origin: $val;
 }
 
 @mixin translate( $x, $y ) {
@@ -459,14 +465,50 @@
 
 
 
+// ==========================================================================
+// PLACEHOLDER
+// ==========================================================================
+
+@mixin placeholder {
+    $prefixs: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+
+    @each $prefix in $prefixs {
+        &:#{$prefix}-placeholder {
+            @content;
+        }
+    }
+}
 
 
 
 
+// ==========================================================================
+// SELECTIONS and USER-SELECT
+// ==========================================================================
 
+@mixin selection( $enabled : true ) {
 
+    @if $enabled != true {
+        $properties : none text -moz-none all;
 
+        @if not index( $enabled, $properties ) {
+            $enabled : none;
+        }
 
+        -moz-user-select: $enabled;
+        -webkit-user-select: $enabled;
+        -ms-user-select: $enabled;
+        -o-user-select: $enabled;
+        user-select: $enabled;
+    }
 
+    @else {
+        ::-moz-selection { @content; }
+        ::selection { @content; }
+    }
+}
 
+@mixin userSelect( $enabled : true ) {
+    @include selection( $enabled );
+}
 

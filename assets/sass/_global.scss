@@ -1,6 +1,13 @@
 body {
 
-    color: #D93D3D;
     @include column-grid-background(12, 100, 20, 20, #f7f7f7, #fff, true);
 
+    h1 {
+        color: #D93D3D;
+        font: {
+            family: $helvetica;
+            weight: 100;
+            size: 50px;
+        }
+    }
 }

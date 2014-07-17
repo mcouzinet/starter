@@ -4,19 +4,21 @@ app = {
 
 
     UI : {
-        'body' : $('body'),
-        'preloader' : $('#UI_preloader')
+        'body' : $( 'body' ),
+        'preloader' : $( '#UI_preloader' )
     },
 
 
 
     init : function(){
-        var $win = $(window);
+        var $win = $( window );
 
         app.resize();
         app.initClick();
 
-        $win.bind('resize', function(){ app.resize(); });
+        $win.bind( 'resize', function(){
+            app.resize();
+        });
     },
 
 
