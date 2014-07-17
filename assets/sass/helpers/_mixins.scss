@@ -379,3 +379,94 @@
 }
 
 
+
+
+// ==========================================================================
+// TRIANGLE
+// ==========================================================================
+
+@mixin triangle( $directions, $sizes, $color, $style : solid ) {
+    $width : 0 0 0 0;
+    $colors : transparent transparent transparent transparent;
+
+    $w : null;
+    $h : null;
+
+    $i : 0;
+    @each $s in $sizes {
+        @if $i == 0 { $w : $s; }
+        @else { $h : $s; }
+        $i : $i + 1;
+    }
+    @if $h == null {
+        $h : $w;
+    }
+
+
+    @if $directions == top {
+        $width : 0 $w/2 $h $w/2;
+        $colors : transparent transparent $color transparent;
+    }
+
+    @else if $directions == (top right) or $directions == (right top) {
+        $width : 0 $w $h 0;
+        $colors : transparent $color transparent transparent;
+    }
+
+    @else if $directions == right {
+        $width : $h/2 0 $h/2 $w;
+        $colors : transparent transparent transparent $color;
+    }
+
+    @else if $directions == (bottom right) or $directions == (right bottom) {
+        $width : 0 0 $h $w;
+        $colors : transparent transparent $color transparent;
+    }
+
+    @else if $directions == (bottom) {
+        $width : $h $w/2 0 $w/2;
+        $colors : $color transparent transparent transparent;
+    }
+
+    @else if $directions == (bottom left) or $directions == (left bottom) {
+        $width : $h 0 0 $w;
+        $colors : transparent transparent transparent $color;
+    }
+
+    @else if $directions == (left) {
+        $width : $h/2 $w $h/2 0;
+        $colors : transparent $color transparent transparent;
+    }
+
+    @else if $directions == (top left) or $directions == (left top) {
+        $width : $h $w 0 0;
+        $colors : $color transparent transparent transparent;
+    }
+
+    @else {
+        @warn 'Wrong directions : #{$directions}'
+    }
+
+    width: 0;
+    height: 0;
+    border: {
+        style: $style;
+        width: $width;
+        color: $colors;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
