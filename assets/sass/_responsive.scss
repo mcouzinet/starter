@@ -1,31 +1,22 @@
 
 
 // MOBILE
-@include media( $sizeMobile, $operator : max-width ) {
-}
+// @include media( $sizeMobile, $operator : max-width ) {  }
 
 
 // TABLET
-@include media( $sizeTablet ) {
-
-}
+// @include media( $sizeTablet ) {  }
 
 
 
 // TABLET LANDSCAPE
-@include media( $sizeTablet, landscape ) {
-
-}
+// @include media( $sizeTablet, landscape ) {  }
 
 
 
 // TABLET PORTRAIT
-@include media( $sizeTablet, portrait ) {
-
-}
+// @include media( $sizeTablet, portrait ) {  }
 
 
 // DESKTOP
-@include media( $sizeDesktop ) {
-
-}
+// @include media( $sizeDesktop ) {  }

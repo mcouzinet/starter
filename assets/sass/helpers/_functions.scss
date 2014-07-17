@@ -1,8 +1,11 @@
 
-// PREFIX CSS PROPERTIES
-// opacity : opacity
-// transform : -prefix-transform, transform
-@function prefix($property, $prefixes: (webkit moz o ms)) {
+
+
+// ==========================================================================
+// PREFIX
+// ==========================================================================
+
+@function prefix( $property, $prefixes: (webkit moz o ms) ) {
 	$vendor-prefixed-properties: transform filter background-clip background-size;
 	$result: ();
 
@@ -18,10 +21,7 @@
 
 
 
-// PREFIX CSS PROPERTIES FOR TRANSITION
-// opacity .2s 1s : opacity .2s 1s
-// transform .2s 1s : -prefix-transform .2s 1s, transform .2s 1s
-@function trans-prefix($transition, $prefix: moz) {
+@function trans-prefix( $transition, $prefix: (webkit moz o ms) ) {
 	$prefixed: ();
 
 	@each $trans in $transition {

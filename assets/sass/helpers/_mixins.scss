@@ -66,12 +66,36 @@
     filter: $values;
 }
 
-@mixin blur( $blur ) {
-    @include filter( blur( $blur ) );
+@mixin blur( $value ) {
+    @include filter( blur( $value ) );
 }
 
-@mixin grayscale( $grayscale ) {
-    @include filter( grayscale( $grayscale ) );
+@mixin grayscale( $value ) {
+    @include filter( grayscale( $value ) );
+}
+
+@mixin sepia( $value ) {
+    @include filter( sepia( $value ) );
+}
+
+@mixin brightness( $value ) {
+    @include filter( brightness( $value ) );
+}
+
+@mixin contrast( $value ) {
+    @include filter( contrast( $value ) );
+}
+
+@mixin hue( $value ) {
+    @include filter( hue-rotate( $value ) );
+}
+
+@mixin invert( $value ) {
+    @include filter( invert( $value ) );
+}
+
+@mixin saturate( $value ) {
+    @include filter( saturate( $value ) );
 }
 
 
@@ -83,7 +107,6 @@
 
 @mixin transition( $values... ) {
     $transitions: ();
-
 
     @each $declaration in $values {
 
@@ -110,6 +133,7 @@
 
 @mixin noTransition {
     -webkit-transition: none !important;
+    -moz-transition: none !important;
     transition: none !important;
 }
 
@@ -121,8 +145,23 @@
 // ==========================================================================
 
 @mixin animation( $value ) {
+    @warn $value;
     -webkit-animation: $value;
     animation: $value;
+}
+
+@mixin keyframe( $name ) {
+    @-webkit-keyframes $name {
+        @content;
+    }
+
+    @-moz-keyframes $name {
+        @content;
+    }
+
+    @-keyframes $name {
+        @content;
+    }
 }
 
 
@@ -239,25 +278,56 @@
 
 
 // ==========================================================================
-// SIMPLE MEDIA QUERIES
+// MEDIA QUERIES
 // ==========================================================================
 
-@mixin media( $value, $orientation : false, $operator: 'min-width', $type : 'screen' ) {
+@mixin media( $value : false, $orientation : false, $operator: 'min-width', $type : false ) {
 
-    @if $orientation != false and $operator != false {
-        @media #{$type} and ( #{$operator} : #{$value} ) and ( orientation: #{$orientation} ) {
-            @content;
-        }
+    $orientation-properties: portrait landscape;
+    $type-properties : screen handheld print aural speech braille embossed projection tty tv all;
 
-    } @else if $orientation != false and $operator == false {
-        @media #{$type} and  ( orientation : #{$orientation} ) {
-            @content;
+
+    @if index( $orientation-properties, $value ) {
+        $orientation : $value;
+        $value : false;
+    }
+
+
+    @if index( $type-properties, $value ) {
+        $type : $value;
+        $value : false;
+    }
+
+
+
+    @if $type != false {
+
+        @if $orientation != false and $operator != false and $value != false {
+            @media #{$type} and ( #{$operator} : #{$value} ) and ( orientation: #{$orientation} ) { @content; }
+
+        } @else if $orientation != false and ( $operator == false or $value == false ) {
+            @media #{$type} and  ( orientation : #{$orientation} ) { @content; }
+
+        } @else if $operator != false and $value != false {
+            @media #{$type} and ( #{$operator} : #{$value} ) { @content; }
+
+        } @else {
+            @media #{$type} { @content; }
         }
 
     } @else {
-        @media #{$type} and ( #{$operator} : #{$value} ) {
-            @content;
+
+        @if $orientation != false and $operator != false and $value != false {
+            @media ( #{$operator} : #{$value} ) and ( orientation: #{$orientation} ) { @content; }
+
+        } @else if $orientation != false and ( $operator == false or $value == false ) {
+            @media ( orientation : #{$orientation} ) { @content; }
+
+        } @else if $operator != false and $value != false {
+            @media ( #{$operator} : #{$value} ) { @content; }
+
         }
+
     }
 
 }
@@ -272,4 +342,40 @@
 @mixin clearfix {
     @extend .clearfix;
 }
+
+
+
+
+// ==========================================================================
+// COLUMN
+// ==========================================================================
+
+@mixin column( $count : 3, $gap : 30px, $width : false, $rule : false ) {
+
+    @if $count != false {
+        -webkit-column-count: $count;
+        -moz-column-count: $count;
+        column-count: $count;
+    }
+
+    @if $gap != false {
+        -webkit-column-gap: $gap;
+        -moz-column-gap: $gap;
+        column-gap: $gap;
+    }
+
+    @if $width != false {
+        -webkit-column-width: $width;
+        -moz-column-width: $width;
+        column-width: $width;
+    }
+
+    @if $rule != false {
+        -webkit-column-rule: $rule;
+        -moz-column-rule: $rule;
+        column-rule: $rule;
+    }
+
+}
+
 

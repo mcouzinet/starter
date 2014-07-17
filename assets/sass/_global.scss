@@ -1,4 +1,15 @@
 body {
 
+    @include media( print ) {
+        background: grey;
+    }
+
+    @include media( 320px, $type : screen ) {
+        background: red;
+
+        @include media( portrait ) {
+            background: yellow;
+        }
+    }
 
 }
